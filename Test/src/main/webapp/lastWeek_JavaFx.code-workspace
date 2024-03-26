@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../vsgit/lastWeek_JavaFx"
+		},
+		{
+			"path": "../../../.."
+		}
+	],
+	"settings": {
+		"java.debug.settings.onBuildFailureProceed": true
+	}
+}
