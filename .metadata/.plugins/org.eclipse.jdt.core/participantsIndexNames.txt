@@ -5,6 +5,8 @@ C:\JOEUN\JSP\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1044849558.in
 \01_JSP_스크립트\src\main\java
 C:\JOEUN\JSP\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1591368824.index
 \Test\src\main\java
+C:\JOEUN\JSP\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2596438623.index
+\03_JSP_액션태그\src\main\java
 C:\JOEUN\JSP\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2725877843.index
 \01_JSP_스크립트\src\main\java
 C:\JOEUN\JSP\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3444285104.index
