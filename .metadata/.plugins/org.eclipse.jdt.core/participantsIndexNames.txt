@@ -9,5 +9,7 @@ C:\JOEUN\JSP\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2596438623.in
 \03_JSP_액션태그\src\main\java
 C:\JOEUN\JSP\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2725877843.index
 \01_JSP_스크립트\src\main\java
+C:\JOEUN\JSP\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1682304129.index
+\04_JSP_내장객체\src\main\java
 C:\JOEUN\JSP\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3444285104.index
 \02_JSP_디렉티브\src\main\java
