@@ -27,6 +27,8 @@ C:\JOEUN\JSP\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2991963706.in
 \06_JSP_파일업로드\src\main\java
 C:\JOEUN\JSP\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\687113675.index
 \01_JSP_스크립트\src\main\java
+C:\JOEUN\JSP\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1627119967.index
+\10_JSP_세션1\src\main\java
 C:\JOEUN\JSP\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1682304129.index
 \04_JSP_내장객체\src\main\java
 C:\JOEUN\JSP\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3723021121.index
