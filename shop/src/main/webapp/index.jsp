@@ -18,6 +18,9 @@
 	<c:if test="${ sessionScope.loginId != null }">
 		<h5>${ sessionScope.loginId } 님 환영합니다.</h5>
 		<a href="logout.jsp">로그아웃</a>
+		<ul>
+			<li><a href="<%= request.getContextPath()%>/board/list.jsp">게시판</a></li>
+		</ul>
 	</c:if>
 	
 	<!-- 비로그인 시 -->
@@ -25,9 +28,6 @@
 		<a href="join.jsp">회원가입</a>
 		<a href="login.jsp">로그인</a>
 	</c:if>
-	
-	
-	
 	
 </body>
 </html>
