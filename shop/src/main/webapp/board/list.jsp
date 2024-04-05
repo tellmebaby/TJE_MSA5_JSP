@@ -13,13 +13,22 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 목록</title>
+<jsp:include page="/layout/link.jsp"/>
 </head>
 <body>
+	
+	<!-- 헤더 -->
+	<jsp:include page="/layout/header.jsp"/>
+
 	<%
 		BoardService boardService = new BoardServiceImpl();
 		List<Board> boardList = boardService.list();
 		
 	%>
+	
+	<!-- 컨텐츠 -->
+	
+	<div class="container">
 	<h1>게시글 목록</h1>
 	
 	<a href="<%= request.getContextPath() %>/board/insert.jsp">글쓰기</a>
@@ -53,8 +62,10 @@
 			}
 		%>
 	</table>
+	</div>
 	
-	
+	<!-- 푸터 -->
+	<jsp:include page="/layout/footer.jsp" />
 </body>
 </html>
 

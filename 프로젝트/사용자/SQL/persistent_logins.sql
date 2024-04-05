@@ -11,3 +11,4 @@ CREATE TABLE persistent_logins (
 
 
 
+-- 시퀀스
