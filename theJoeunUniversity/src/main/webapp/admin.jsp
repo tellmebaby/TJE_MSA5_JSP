@@ -9,6 +9,9 @@
 <meta charset="UTF-8">
 <title>Management System</title>
 <link rel="stylesheet" href="static/css/adminLogin.css">
+
+
+
 </head>
 
 
@@ -34,12 +37,12 @@
 					</div>
 					<!-- 아이디 -->
 					<div class="login-inputbox">
-						<input type="text" name="id" placeholder="아이디를 입력해주세요">
+						<input style="font-family:initial;" type="text" name="id" placeholder="아이디를 입력해주세요">
 
 					</div>
 					<!-- 비밀번호 -->
 					<div class="login-inputbox">
-						<input type="password" name="passwd" placeholder="비밀번호를 입력해주세요">
+						<input style="font-family:initial;" id="index-pw" type="password" name="passwd" placeholder="비밀번호를 입력해주세요">
 						<input type="submit" value="로그인">
 					</div>
 				</div>

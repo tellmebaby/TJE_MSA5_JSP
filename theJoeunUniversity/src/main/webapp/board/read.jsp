@@ -33,16 +33,52 @@
 				</p>
 			</div>
 		</div>
-		<div class="container-readForm">
+		<div class="container-insertForm">
 			<%
 			if (board != null) {
 			%>
-			<div class="item-boardReadt">
-				<span><%=board.getTitle()%></span>
-				<span><%=board.getWriter()%></span>
-			</div>
-			<div class="item-boardReadb">
-				<span><%=board.getContent()%></span>
+			<table>
+				<tr>
+					<th>제목</th>
+					<td><%=board.getTitle()%></td>
+				</tr>
+				<tr>
+					<th>작성자</th>
+					<td><%=board.getWriter()%></td>
+				</tr>
+				<tr>
+					<th>내용</th>
+					<td><%=board.getContent()%></td>
+				</tr>
+			</table>
+			<div class="container-insertFt">
+				<div class="insertBtn">
+					<table>
+						<tr>
+							<td>
+								<form action="<%=request.getContextPath()%>/board/boardlist.jsp"
+									method="GET">
+									<input type="submit" value="닫기" />
+								</form>
+							</td>
+							<td>
+								<form action="<%=request.getContextPath()%>/board/update.jsp?"
+									method="post">
+									<input type="hidden" name="no" value="<%=board.getNo()%>" /><input
+										type="submit" value="수정" />
+								</form>
+							</td>
+							<td>
+								<form
+									action="<%=request.getContextPath()%>/board/delete_pro.jsp"
+									method="post">
+									<input type="hidden" name="no" value="<%=board.getNo()%>" /> <input
+										type="submit" value="삭제" />
+								</form>
+							</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<%
 			} else {
@@ -52,20 +88,6 @@
 			}
 			%>
 		</div>
-	</div>
-
-
-	<!-- 기존 -->
-	<div>
-		<a href="<%=request.getContextPath()%>/board/boardlist.jsp"> 닫기 </a> <a
-			href="<%=request.getContextPath()%>/board/update.jsp?no=<%=board.getNo()%>">
-			수정 </a>
-		<form action="<%=request.getContextPath()%>/board/delete_pro.jsp"
-			method="post">
-			<input type="hidden" name="no" value="<%=board.getNo()%>" /> <input
-				type="submit" value="삭제" />
-		</form>
-
 	</div>
 </body>
 </html>
