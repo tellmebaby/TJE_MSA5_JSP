@@ -34,7 +34,18 @@
 		<%
 		if (user != null) {
 		%>
-		<div class="container-insertForm">
+		<div class="u-u-body">
+			<div class="u-u-item1">
+				
+				<!-- jsp 로 파일 업로드 처리 -->
+				<form action="upload.jsp" method="post" enctype="multipart/form-data">
+				<!-- Servlet 으로 파일 업로드 처리 -->
+					<input type="file" name="file" multiple />
+					<input type="submit" value="업로드" />
+				</form>
+			</div>
+			<div class="u-u-item2">
+		<div>
 			<form action="<%=request.getContextPath()%>/users/update_pro.jsp" method="post">
 				<input type="hidden" name="no" value="<%=user.getUno()%>" />
 				<table>
@@ -68,8 +79,8 @@
 			</tr>
 				</table>
 				<div class="container-insertFt">
-					<div class="insertBtn">
-						<input type="submit" value="수정" />
+					<div>
+						<input class="u-u-btn" type="submit" value="수정" />
 					</div>
 				</div>
 			</form>
@@ -80,6 +91,8 @@
 		<%
 		}
 		%>
+		</div>
+			</div>
 		</div>
 	</div>	
 </body>

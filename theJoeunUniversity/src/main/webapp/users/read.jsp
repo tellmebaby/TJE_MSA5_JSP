@@ -37,15 +37,13 @@
 			<%
 			if (user != null) {
 			%>
-			<div class="item">
+			<div class="u-r-item">
 				<div class="sub-item">
 					<img src="img/user1.png" alt="그림">
-				<ul>
-					<li>학과 코드</li>
-					<li>1 : 컴퓨터 공학</li>
-					<li>2 : 전기 공학</li>
-					<li>3 : 화학 공학</li>
-				</ul>
+					<div class="sub-item-txt">학과 코드</div>
+					<div class="sub-item-txt">1 : 컴퓨터 공학</div>
+					<div class="sub-item-txt">2 : 전기 공학</div>
+					<div class="sub-item-txt">3 : 화학 공학</div>
 				</div>
 			<table>
 				<tr>

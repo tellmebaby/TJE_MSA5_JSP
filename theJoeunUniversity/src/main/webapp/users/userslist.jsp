@@ -93,17 +93,19 @@
 				}
 				%>
 			</table>
-			<%
-			} else {
-				userList = userService.list();
-			out.println("잘못된 접근입니다.?");
-			}
-			%>
 			<div class="container-boardBottom">
 				<div class="bottom-btn">
 					<a href="<%=request.getContextPath()%>/users/insert.jsp">학사정보 등록</a>
 				</div>
 			</div>
+			<%
+			} else {
+				userList = userService.list();
+			%>
+			<div class="d-message"><img src="img/exclamcon.png" alt="exclamcon"><h1>잘못된 접근입니다.</h1></div>
+			<%
+			}
+			%>
 		</div>
 	</div>
 </body>

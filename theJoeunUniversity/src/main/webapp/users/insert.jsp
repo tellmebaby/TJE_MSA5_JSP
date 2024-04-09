@@ -26,33 +26,29 @@
 			<form action="<%=request.getContextPath()%>/users/insert_pro.jsp">
 				<table>
 					<tr>
-				<th>학번</th>
-				<td><input type="text" name="studentid" value="" /></td>
-				</tr>
-				<tr>
-					<th>성명</th>
-					<td><input type="text" name="name" value="" /></td>
-				</tr>
-				<tr>
-					<th>생년월일</th>
-					<td><input type="text" name="birth" value="" /></td>
-				</tr>
-				<tr>
-					<th>메일주소</th>
-					<td><input type="text" name="mail" value="" /></td>
-				</tr>
-				<tr>
-					<th>재학구분</th>
-					<td><input type="text" name="academicstatus" value="" /></td>
-				</tr>
-				<tr>
-					<th>학과</th>
-					<td><input type="text" name="dno" value="" /></td>
-				</tr>
-				<tr>
-					<th>사진</th>
-					<td><input type="file" name="reviewimg" id="reviewimageFileOpenInput" accept="image/png, image/jpeg"/></td>
-				</tr>
+					<th>학번</th>
+					<td><input type="text" name="studentid" value="" /></td>
+					</tr>
+					<tr>
+						<th>성명</th>
+						<td><input type="text" name="name" value="" /></td>
+					</tr>
+					<tr>
+						<th>생년월일</th>
+						<td><input type="text" name="birth" value="" /></td>
+					</tr>
+					<tr>
+						<th>메일주소</th>
+						<td><input type="text" name="mail" value="" /></td>
+					</tr>
+					<tr>
+						<th>재학구분</th>
+						<td><input type="text" name="academicstatus" value="" /></td>
+					</tr>
+					<tr>
+						<th>학과</th>
+						<td><input type="text" name="dno" value="" /></td>
+					</tr>
 				</table>
 				<div class="container-insertFt">
 					<div class="insertBtn">

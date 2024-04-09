@@ -176,42 +176,61 @@ a:link{text-decoration: none;}
 .container-boardBottom .bottom-btn:hover {
 	transform: translateY(-5px);
 }
-/* .container-insertForm { */
-	
-/* } */
+
+.container-insertForm {
+	text-align: -webkit-center;
+}
 
 .container-insertForm .item {
 	display:flex;
+	justify-content: space-between;
 	border:1px solid black;	
 }
-.container-insertForm .item .sub-item {
-	width: 250px;
+
+.container-insertForm .u-r-item {
+	display:flex;
+	justify-content: space-between;
+	border:1px solid black;	
+	width: 50%;
+}
+.container-insertForm .u-r-item .sub-item {
+	width: 30%;
 }
 
-.container-insertForm .item .sub-item img {
-	border: 1px solid black;
+.container-insertForm .u-r-item td {
+	width: 300px;
+}
+
+.container-insertForm .u-r-item .sub-item img {
+	padding: 50px;
 }
 .container-insertForm .item .sub-item li {
 	margin: 45px;
 	font-size: 1em;
 }
 
+.container-insertForm form {
+	width: 70%;
+}
 .container-insertForm table {
 	margin: 30px 0px;
 	text-align: center;
-	width: 100%;	
+	width: 50%;	
 }
 
 
 .container-insertForm table th {
 	padding: 18px 0px;
+	width: 30%;
 	
 }
 
 .container-insertForm table input {
+	align-content: center;
 	width: 100%;
 	border: 1px solid #aaa;
 	text-align: center;
+	height: 40px;
 }
 
 
@@ -226,6 +245,62 @@ a:link{text-decoration: none;}
 	border: 1px solid #aaa;
 }
 
+input#file-upload-button {
+	width: 30px;
+	height: 40px;
+}
+/* 유저영역 */
+.u-u-body {
+	display:flex;
+	align-items: center;
+	text-align: -webkit-center;
+}
+.u-u-body .u-u-item1 {
+	width:30%;
+	padding: 0px;
+	text-align: -webkit-right;
+}
+.u-u-body .u-u-item1 a {
+	border: 1px solid black;
+	padding: 100px;
+}
+
+.u-u-body .u-u-item1 form {
+	text-align: center;
+	border: 1px solid black;
+}
+
+
+.u-u-body .u-u-item2 {
+	width: 60%;
+	text-align: center;
+}
+
+.u-u-body .u-u-item2 form {
+	width: 60%;
+	padding-top:55px;
+}
+
+.u-u-body .u-u-item2 td {
+	height: 35px;
+	width: 100px;
+    text-align: center;
+}
+
+.u-u-body .u-u-item2 th {
+	padding: 0px 50px;
+}
+
+.u-u-btn {
+	margin-top: 49px;
+	width: 130px;
+	height: 25px;
+	font-size: 0.9rem;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 15px;
+	background-color: white;
+}
 /* 공지사항 읽기 */
 .container-readForm table {
 	margin: 30px 0px;
@@ -367,3 +442,14 @@ a:link{text-decoration: none;}
     text-align:center;
 }
 
+.d-message {
+	display:flex;
+    align-items: center;
+    flex-direction: column;
+    height: 400px;
+}
+
+.d-message img {
+	width: 20%;
+	padding: 40px;
+}
