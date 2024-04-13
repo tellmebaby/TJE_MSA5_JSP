@@ -48,7 +48,7 @@
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td><%=board.getContent()%></td>
+					<td id="b-r-content"><pre><%=board.getContent()%></pre></td>
 				</tr>
 			</table>
 			<div class="container-insertFt">

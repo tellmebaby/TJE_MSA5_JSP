@@ -38,4 +38,11 @@
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="admin.DAO.BoardDAO"/>
     <fullyQualifiedTypeName name="admin.DTO.Board"/>
+    <fullyQualifiedTypeName name="admin.DTO.Userimg"/>
+    <fullyQualifiedTypeName name="admin.DAO.UserimgDAO"/>
+    <fullyQualifiedTypeName name="javax.websocket.server.ServerEndpoint"/>
+    <fullyQualifiedTypeName name="javax.websocket.OnOpen"/>
+    <fullyQualifiedTypeName name="javax.websocket.Session"/>
+    <fullyQualifiedTypeName name="javax.websocket.OnClose"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
 </qualifiedTypeNameHistroy>

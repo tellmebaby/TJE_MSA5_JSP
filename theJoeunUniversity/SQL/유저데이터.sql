@@ -15,14 +15,14 @@ INSERT ALL
 SELECT * FROM dual;
 
 INSERT ALL
-    INTO Users (uNo, StudentID, Name, Birth, Mail, AcademicStatus, dNo) VALUES (1, '20220001', 'John Doe', '19900515', 'john@example.com', 'Enrollment', 1)
-    INTO Users (uNo, StudentID, Name, Birth, Mail, AcademicStatus, dNo) VALUES (2, '20220002', 'Jane Smith', '19920820', 'jane@example.com', 'Enrollment', 2)
-    INTO Users (uNo, StudentID, Name, Birth, Mail, AcademicStatus, dNo) VALUES (3, '20220003', 'Alice Johnson', '19881210', 'alice@example.com', 'Enrollment', 1)
-    INTO Users (uNo, StudentID, Name, Birth, Mail, AcademicStatus, dNo) VALUES (4, '20220004', 'Bob Brown', '19910325', 'bob@example.com', 'Enrollment', 2)
-    INTO Users (uNo, StudentID, Name, Birth, Mail, AcademicStatus, dNo) VALUES (5, '20220005', 'Emily Davis', '19930618', 'emily@example.com', 'Enrollment', 1)
+    INTO Users (uNo, StudentID, Name, Birth, Mail, AcademicStatus, dNo) VALUES (1, '20220001', 'John Doe', '19900515', 'john@example.com', '재학', 1)
+    INTO Users (uNo, StudentID, Name, Birth, Mail, AcademicStatus, dNo) VALUES (2, '20220002', 'Jane Smith', '19920820', 'jane@example.com', '재학', 2)
+    INTO Users (uNo, StudentID, Name, Birth, Mail, AcademicStatus, dNo) VALUES (3, '20220003', 'Alice Johnson', '19881210', 'alice@example.com', '재학', 1)
+    INTO Users (uNo, StudentID, Name, Birth, Mail, AcademicStatus, dNo) VALUES (4, '20220004', 'Bob Brown', '19910325', 'bob@example.com', '재학', 2)
+    INTO Users (uNo, StudentID, Name, Birth, Mail, AcademicStatus, dNo) VALUES (5, '20220005', 'Emily Davis', '19930618', 'emily@example.com', '졸업', 1)
 SELECT * FROM dual;
 
-DELETE FROM users;
+DELETE FROM Users;
 
 CREATE TABLE Users (
 	uNo number NOT NULL,
@@ -57,6 +57,18 @@ CREATE TABLE Department (
 	Majorname varchar2(100) NOT NULL
 );
 
+-- 시퀀스
+CREATE SEQUENCE SEQ_UIMG
+INCREMENT BY 1
+START WITH 1
+MINVALUE 1
+MAXVALUE 9999;
+CREATE SEQUENCE SEQ_USERS
+INCREMENT BY 1
+START WITH 1
+MINVALUE 1
+MAXVALUE 9999;
+
 CREATE TABLE Score (
 	No number NOT NULL,
 	Subjectscore varchar2(50) NOT NULL,
@@ -80,7 +92,7 @@ ALTER TABLE calendar ADD CONSTRAINT PK_CALENDAR PRIMARY KEY (NO);
 				   JOIN Users u ON sc.uNo = u.uNo 
 				   WHERE u.StudentID = '20220001';
                    
--- 학과데이터       
+                   
 INSERT INTO department (Dno, majorname)
 VALUES	(1, '컴퓨터 공학');
 INSERT INTO department (Dno, majorname)

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="container-insertForm"/>
+		<item key="selection" value=""/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="u-u-item1"/>
+			<item value="sub-item"/>
+			<item value="title"/>
+			<item value="insertft"/>
 			<item value="container-insertForm"/>
 			<item value="select"/>
 			<item value="a:link"/>
 			<item value="hover"/>
-			<item value="update"/>
-			<item value="boardList"/>
-			<item value="admin"/>
-			<item value="insert"/>
 		</list>
 		<list key="replacehistory">
 		</list>

@@ -1,65 +1,84 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.LocalTime"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
 	String root = request.getContextPath();
+
+ 	LocalTime now = LocalTime.now();
+ 	DateTimeFormatter timeDtf = DateTimeFormatter.ofPattern("HH시 mm분 ss초");
+ 	String fomatTime = now.format(timeDtf);
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>더조은대학교</title>
+<!-- swiper 플러그인 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="<%=root%>/static/css/style.css">
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- swiper 플러그인 -->
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="<%=root%>/static/js/index.js"></script>
 <!-- css -->
 <jsp:include page="/layout/link.jsp" />
-<link href="<%= request.getContextPath()%>/Euna/css/style.css" rel="stylesheet">
+<link rel="icon" href="<%=root%>/static/img/icon.png">
 
 </head>
 <body>
-	<!-- 헤더 -->
-	<jsp:include page="/layout/header.jsp" />
+	<!-- Slider main container -->
+	<div class="first">
+	 		<div id="myTime">
+	 			<h2 class="myTime"><%=fomatTime %></h2>
+	 		</div>
 
-	<!-- 컨텐츠 -->
-	<div class="container txt-center">	
-		<div class="flex j-center">
-			<figure class="figure1">
-		        <figcaption>더조은 대학교</figcaption>
-		            <img src="<%= root %>/static/img/대학로고.png" >
-		    </figure>
+		<div class="swiper">
+			<h1 class="click">화면을 터치해주세요!</h1>
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+				<!-- Slides -->
+				<!-- (.swiper-slide>img[src="../img/slide$$.jpg"])*10 -->
+				<div class="swiper-slide">
+					<a href="<%=root%>/main.jsp"><img class="swiper-slide"
+						src="<%=root%>/static/img/slide_1.png" alt=""></a>
+				</div>
+				<div class="swiper-slide">
+					<a href="<%=root%>/main.jsp"><img class="swiper-slide"
+						src="<%=root%>/static/img/slide_2.png" alt=""></a>
+				</div>
+				<div class="swiper-slide">
+					<a href="<%=root%>/main.jsp"><img class="swiper-slide"
+						src="<%=root%>/static/img/slide_3.png" alt=""></a>
+				</div>
+				<div class="swiper-slide">
+					<a href="<%=root%>/main.jsp"><img class="swiper-slide"
+						src="<%=root%>/static/img/slide_4.png" alt=""></a>
+				</div>
+				<div class="swiper-slide">
+					<a href="<%=root%>/main.jsp"><img class="swiper-slide"
+						src="<%=root%>/static/img/slide_5.png" alt=""></a>
+				</div>
+			</div>
+			<!-- If we need pagination (닷츠) -->
+			<div class="swiper-pagination"></div>
+
 		</div>
-		    <div class="flex j-space-between">
-		        <figure class="figure2">
-		        <a href="<%= root %>/Euna/Info.jsp"><img src="<%= root %>/static/img/학교소개.png" ></a>
-		            <figcaption>학교 소개</figcaption>
-		        </figure>
-		        <figure class="figure2">
-		        	<a href="<%= root %>/information/login.jsp">
-			            <img src="<%= root %>/static/img/학생정보.png" >
-		        	</a>
-		            <figcaption>학생 정보</figcaption>
-		        </figure>
-		    </div>
-		    <div class="flex j-space-between">
-		        <figure class="figure3">
-		        	<a href="<%= root %>/board/list.jsp">
-			            <img src="<%= root %>/static/img/공지사항.png" >	        	
-		        	</a>
-		            <figcaption>공지 사항</figcaption>
-		        </figure>
-		        <figure class="figure4">
-		            <a href="<%= root %>/schedule/schedule_user.jsp">
-						<!-- 이미지수정필요~ -->
-		            	<img src="<%=root%>/static/img/커뮤니티.png" >
-		            </a>
-		            <figcaption>학사 일정</figcaption>
-		        </figure>
-		    </div>
+
 	</div>
-	
-	<!-- 푸터 -->
-	<jsp:include page="/layout/footer.jsp" />
+
+	<script>
+ 		function timeReload(){
+ 			$("#myTime").load(window.location.href + " #myTime");
+ 		}
+ 		setInterval(timeReload, 1000);
+	</script>
 </body>
 </html>
