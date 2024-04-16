@@ -2,6 +2,7 @@ package filter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -10,53 +11,68 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import shop.dao.UserRepository;
+import shop.dto.PersistentLogin;
 
 public class LoginFilter implements Filter{
 
-	private FilterConfig filterConfig = null;
+	
+	Cookie[] cookies;
+	UserRepository userRepository;
+	
 	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		System.out.println("LoginFilter 초기화");
-		this.filterConfig = filterConfig;
+		userRepository = new UserRepository();
 	}
 
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println("InitParamFilter 수행...");
-		String id = request.getParameter("id");
-		String passwd = request.getParameter("passwd");
+		// request 객체로 부터 자동 로그인 쿠키 확인
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		cookies = httpRequest.getCookies();
 		
-		String param1 = filterConfig.getInitParameter("param1");
-		String param2 = filterConfig.getInitParameter("param2");
+		String rememberMe = null; 	// 자동로그인 여부
+		String token = null;		// 인증 토큰
 		
-		String message;
-		
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter writer = response.getWriter();
-
-		if( id.equals(param1) && passwd.equals(param2) )
-			message = "로그인 성공했습니다.";
-		else {
-			message = "로그인 실패했습니다.";
-			// 관리자 계정 admin/1234 가 일치하지 않으면 메인화면으로 이동
-			
-			// 포워드
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
-			dispatcher.forward(request, response);
+		if( cookies != null ) {
+			for (int i = 0; i < cookies.length; i++) {
+				Cookie cookie = cookies[i];
+				String cookieName = cookie.getName();
+				String cookieValue = URLDecoder.decode(cookie.getValue(),"UTF-8");
+				switch(cookieName) {
+					case "rememberMe"	: rememberMe = cookieValue; break;
+					case "token"		: token = cookieValue; break;
+				}
+			}
 		}
+		// 로그
+		System.out.println("LoginFilter...");
+		System.out.println("rememberMe : " + rememberMe);
+		System.out.println("token : " + token);
 		
-		writer.println(message);
+		// 자동 로그인 쿠키가 검증되면, 로그인 처리
+		HttpSession session = httpRequest.getSession();
+		if( rememberMe != null && token != null ) {
+			PersistentLogin persistentLogin = userRepository.selectTokenByToken(token);
+			if( persistentLogin != null ) {
+				// 로그인 처리
+				session.setAttribute("loginId", persistentLogin.getUserId());
+			}
+		}
 		
 		chain.doFilter(request, response);
 	}
 
 	@Override
 	public void destroy() {
-		System.out.println("LoginFilter 해제...");
+		
 		
 	}
 

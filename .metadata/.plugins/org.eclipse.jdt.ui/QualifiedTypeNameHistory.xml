@@ -20,14 +20,10 @@
     <fullyQualifiedTypeName name="shop.DAO.UserDAO"/>
     <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="java.util.UUID"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
     <fullyQualifiedTypeName name="shop.Service.UserService"/>
     <fullyQualifiedTypeName name="shop.Service.UserServiceImpl"/>
-    <fullyQualifiedTypeName name="java.net.URLDecoder"/>
     <fullyQualifiedTypeName name="shop.DTO.PersistentLogins"/>
     <fullyQualifiedTypeName name="shop.DTO.Board"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="admin.DTO.Calendar"/>
     <fullyQualifiedTypeName name="admin.DAO.CalendarDAO"/>
@@ -49,4 +45,10 @@
     <fullyQualifiedTypeName name="javax.servlet.Filter"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
+    <fullyQualifiedTypeName name="shop.dao.UserRepository"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="java.net.URLDecoder"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="shop.dto.PersistentLogin"/>
 </qualifiedTypeNameHistroy>

@@ -28,9 +28,49 @@ public class UserRepository extends JDBConnection {
 	 * @return
 	 */
 	public User login(String id, String pw) {
-		User result = new User();
 		
-		return result;
+				User user = new User();
+				user.setId(id);
+				user.setPassword(pw);
+				
+		// SQL 작성
+				String sql = " SELECT * "
+						   + " FROM user "
+						   + " WHERE id = ? and password = ? ";
+				try {
+					// 쿼리(SQL) 실행 객체 생성 - PreparedStatement (psmt)
+					psmt = con.prepareStatement(sql);
+					
+					// psmt.setXXX( 순서번호, 매핑할 값 );
+					psmt.setString( 1, user.getId() );		
+					psmt.setString( 2, user.getPassword() );		
+					
+					// 쿼리(SQL) 실행 -> 결과  - ResultSet (rs)
+					rs = psmt.executeQuery();
+					
+					// 조회 결과를 1건 가져오기
+					if( rs.next() ) {		// next() : 실행 결과의 다음 데이터로 이동
+						// 결과 데이터 가져오기
+						// rs.getXXX("컬럼명") --> 해당 컬럼의 데이터를 가져온다
+						// * "컬럼명"의 값을 특정 타입으로 변환
+						user.setId(rs.getString("id") );
+						user.setPassword(rs.getString("password") );
+						user.setName(rs.getString("name") );
+						user.setGender(rs.getString("gender") );
+						user.setBirth(rs.getString("birth"));
+						user.setMail(rs.getString("mail") );
+						user.setPhone(rs.getString("phone") );
+						user.setAddress(rs.getString("address") );
+						user.setRegistDay(rs.getString("regist_day") );
+						return user;
+					}
+					return null;
+				} catch(SQLException e) {
+					System.err.println("로그인 시, 예외 발생");
+					e.printStackTrace();
+				}
+					
+				return null;
 	}
 	
 	
