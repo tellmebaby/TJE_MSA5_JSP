@@ -10,13 +10,36 @@ import shop.dto.Product;
 public class OrderRepository extends JDBConnection {
 	
 	/**
-	 * 주문 등록
-	 * @param user
+	 * 주문등록
+	 * @param order
 	 * @return
 	 */
 	public int insert(Order order) {
 		int result = 0;
+		String sql = " INSERT INTO order ( ship_name, zip_code, country, address, date, order_pw, user_id, total_price, phone) "
+				   + " VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ? ) ";
 		
+		try {
+			psmt = con.prepareStatement(sql);			
+			psmt.setString( 1, order.getShipName() );		
+			psmt.setString( 2, order.getZipCode() );		
+			psmt.setString( 3, order.getCountry() );	
+			psmt.setString( 4, order.getAddress() );	
+			psmt.setString( 5, order.getDate() );	
+			psmt.setString( 6, order.getOrderPw() );	
+			psmt.setString( 7, order.getUserId() );	
+			psmt.setInt( 8, order.getTotalPrice() );	 
+			psmt.setString( 9, order.getPhone() );	
+			
+			result = psmt.executeUpdate();		// SQL 실행 요청, 적용된 데이터 개수를 받아온다.
+												// 게시글 1개 적용 성공 시, result : 1
+												// 				실패 시, result : 0
+			// executeUpdate()
+			// : SQL (INSERT, UPDATE, DELETE)을 실행하고 적용된 데이터 개수를 int 타입으로 반환
+		} catch (SQLException e) {
+			System.err.println("주문 등록 시, 예외 발생");
+			e.printStackTrace();
+		}
 		return result;
 	}
 
@@ -25,9 +48,31 @@ public class OrderRepository extends JDBConnection {
 	 * @return
 	 */
 	public int lastOrderNo() {
-		int result = 0;
 		
-		return result;
+		Order order = new Order();
+		
+		String sql = " SELECT order_no FROM 'order' ORDER BY 'order_no' DESC LIMIT 1 ";
+		
+		try {
+			// 쿼리(SQL) 실행 객체 생성 - PreparedStatement (psmt)
+			psmt = con.prepareStatement(sql);
+			
+			// 쿼리(SQL) 실행 -> 결과  - ResultSet (rs)
+			rs = psmt.executeQuery();
+			
+			// 조회 결과를 1건 가져오기
+			if( rs.next() ) {		// next() : 실행 결과의 다음 데이터로 이동
+				// 결과 데이터 가져오기
+				// rs.getXXX("컬럼명") --> 해당 컬럼의 데이터를 가져온다
+				// * "컬럼명"의 값을 특정 타입으로 변환
+				order.setOrderNo( rs.getInt("order_no") );
+			}
+		} catch(SQLException e) {
+			System.err.println("게시글 조회 시, 예외 발생");
+			e.printStackTrace();
+		}
+		// 마지막 주문 정보 1건 의 주문 번호 반환
+		return order.getOrderNo();
 	}
 
 	

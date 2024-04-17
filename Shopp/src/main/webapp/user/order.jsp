@@ -1,4 +1,8 @@
 
+<%@page import="shop.dto.Order"%>
+<%@page import="shop.dto.Product"%>
+<%@page import="java.util.List"%>
+<%@page import="shop.dao.OrderRepository"%>
 <%@page import="shop.dto.User"%>
 <%@page import="shop.dao.UserRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,21 +17,23 @@
 <% 
 
 		// ...
-	
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		String root = request.getContextPath();
 	
 		// 주문 내역 목록을 세션에서 가져오기
-		
+		OrderRepository orderDAO = new OrderRepository();
+		List<Product> orderList = orderDAO.list(id);
+		Order order = new Order();
+		String orderPhone = order.getPhone();
+		int orderCount = orderList.size();
 		// 회원인 경우
-	String id = request.getParameter("id");
-	String pw = request.getParameter("pw");
-	String root = request.getContextPath();
-	
-	UserRepository userDAO = new  UserRepository();
-	User loginUser = userDAO.login(id, pw);
+		UserRepository userDAO = new  UserRepository();
+		User loginUser = userDAO.login(id, pw);
 	
 	
 	
-	Boolean login ;
+	boolean login ;
 	
 	if(loginUser == null){
 	// 로그인 실패

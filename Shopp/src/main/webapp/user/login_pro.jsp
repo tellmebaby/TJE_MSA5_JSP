@@ -17,9 +17,12 @@
 	if(loginUser == null){
 	// 로그인 실패
 	out.print("로그인 실패했습니다.");
+	response.sendRedirect("login.jsp?msg=0");
 	}else{
 	// 로그인 성공
 	out.print("로그인 성공했습니다.");
+	session.setAttribute("loginId", loginUser.getId());
+	response.sendRedirect("complete.jsp");
 	}
 	
 	

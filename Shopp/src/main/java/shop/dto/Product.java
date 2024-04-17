@@ -32,6 +32,7 @@ public class Product implements Serializable {
 	private String userId;			// 회원ID
 	private int orderNo;			// 주문번호
 	private String type;			// 입출고 타입
+	private int amount;				// 입출고량 
 	
 	public Product() {
 		
@@ -43,6 +44,14 @@ public class Product implements Serializable {
 		this.unitPrice = unitPrice;
 	}
 
+	public int getAmount() {
+		return amount;
+	}
+	
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	
 	public String getProductId() {
 		return productId;
 	}
