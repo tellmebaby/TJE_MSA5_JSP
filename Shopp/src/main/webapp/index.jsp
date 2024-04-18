@@ -4,13 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Shop</title>
+<title>Shop🛒 - ALOHA CLASS🌴</title>
 	<jsp:include page="/layout/meta.jsp" />
 	<jsp:include page="/layout/link.jsp" />
 </head>
 <body>
 <%
 	String user_id = (String) session.getAttribute("loginId");	
+	String root = request.getContextPath();
 %>
 <jsp:include page="/layout/header.jsp" />
 	<div class="px-4 py-5 my-5 text-center">

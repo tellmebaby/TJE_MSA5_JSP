@@ -46,7 +46,7 @@
 					<div class="card p-3">
 						<!-- 이미지 영역 -->
 						<div class="img-content">
-							<img src="<%=root + product.getFile() %>" class="w-100 p-2">
+							<img src="img?id=<%=product.getProductId() %>" class="w-100 p-2">
 						</div>
 						<!-- 컨텐츠 영역 -->
 						<div class="content">
@@ -54,10 +54,10 @@
 							<p><%=product.getDescription() %></p>
 							<p class="text-end price">₩ <%=product.getUnitPrice()%></p>
 							<p class="d-flex justify-content-between">
-								<a href="./cart_pro.jsp?id=P000000"
+								<a href="./cart_pro.jsp?id=<%=product.getProductId() %>"
 								class="btn btn-outline-primary"><i
 								class="material-symbols-outlined">shopping_bag</i></a>
-								<a href="./product.jsp?id=P000000"
+								<a href="./product.jsp?id=<%=product.getProductId() %>"
 								class="btn btn-outline-primary">상세 정보</a>
 							</p>
 						</div>						
