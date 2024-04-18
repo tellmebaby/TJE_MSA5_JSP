@@ -23,9 +23,6 @@
 	ProductRepository productDAO = new ProductRepository();
 	String product_id = request.getParameter("id");
 	Product product = productDAO.getProductById(product_id);
-	
-	
-
 %>
 
 
