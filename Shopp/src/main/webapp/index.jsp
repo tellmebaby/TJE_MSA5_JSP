@@ -10,16 +10,29 @@
 	
 </head>
 <body>
+<%
+	String user_id = (String) session.getAttribute("loginId");	
+%>
 <jsp:include page="/layout/header.jsp" />
 	<div class="px-4 py-5 my-5 text-center">
 		<h1 class="display-5 fw-bold text-body-emphasis">메인화면</h1>
 		<div class="col-lg-6 mx-auto">
 			<p class="lead mb-4">Shop 쇼핑몰 입니다.</p>
 			<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-				<input type="button" value="상품목록">
-				<form action = "user/login.jsp" method="get">
-				<input type="submit" value="로그인">
-				</form>
+				<a href="shop/products.jsp" class="btn btn-primary btn-lg px-4 gap-3">상품목록</a>
+				<%
+				if(user_id == null) {
+				%>
+				<a href="user/login.jsp" class="btn btn-outline-secondary btn-lg px-4">로그인</a>
+				<% 
+				} 
+				else
+				{
+				%>
+				<a href="user/logout.jsp" class="btn btn-outline-danger btn-lg px-4">로그아웃</a>
+				<%
+				}
+				%>
 			</div>
 		</div>
 	</div>

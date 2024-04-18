@@ -12,6 +12,7 @@
 	// 세션 무효화
 	session.invalidate();
 	
+	
 	// 쿠키 전달
 	response.addCookie(cookieRememberMe);
 	response.addCookie(cookieToken);
@@ -20,6 +21,6 @@
 	// i) jsp 를 지정하여 이동
 	// response.sendRedirect("index.jsp");
 	// ii) url 경로를 지정하여 이동
-	response.sendRedirect(request.getContextPath() + "/");
+	response.sendRedirect(request.getContextPath() + "/index.jsp");
 	
 %>

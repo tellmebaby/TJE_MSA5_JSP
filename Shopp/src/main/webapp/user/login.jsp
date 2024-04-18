@@ -14,7 +14,9 @@
 		String root = request.getContextPath();
 		String error = request.getParameter("error");
 		String rememberId = "";
-		
+		String user_id = (String) session.getAttribute("id");
+	    String user_pw = (String) session.getAttribute("pw");
+	    
 		
 		// 이미 로그인한 경우
 		String loginId = (String) session.getAttribute("loginId");
