@@ -20,6 +20,7 @@
 		String root = request.getContextPath();
 		ProductRepository productDAO = new ProductRepository();
 		String cartId = "";
+		int totalQuantity = 0;
 	%>
 	<jsp:include page="/layout/header.jsp" />
 	
@@ -70,6 +71,7 @@
 					int unitPrice = product.getUnitPrice() != null ? product.getUnitPrice().intValue() : 0;
 					int quantity  = productCountMap.get(productId);
 					int subtotal = unitPrice * quantity;
+					totalQuantity += quantity;
 					cartSum += subtotal;
 				%>
 				<tr>
@@ -113,7 +115,7 @@
 
 	<script>
 		let cartId = '<%=cartId%>'
-		let cartCount = '1'
+		let cartCount = '<%=totalQuantity%>'
 		let cartSum = document.getElementById('cart-sum')
 		
 		function order() {

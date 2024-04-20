@@ -16,24 +16,37 @@ public class OrderRepository extends JDBConnection {
 	 */
 	public int insert(Order order) {
 		int result = 0;
-		String sql = " INSERT INTO order ( ship_name, zip_code, country, address, date, order_pw, user_id, total_price, phone) "
-				   + " VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ? ) ";
+				
+		String sql = " INSERT INTO joeun.order ( ship_name, zip_code, country, address, date";
+			if (order.getOrderPw() != null && !order.getOrderPw().isEmpty() ) {  
+				sql += " ,order_pw "
+					+ " , total_price ) "
+					+ " VALUES (?,?,?,?,?,?,?) ";	
+			}else {
+				sql += ",user_id "	
+					+ " , total_price ) "
+					+ " VALUES (?,?,?,?,?,?,?) ";	
+			}
+					
 		
 		try {
-			psmt = con.prepareStatement(sql);			
-			psmt.setString( 1, order.getShipName() );		
-			psmt.setString( 2, order.getZipCode() );		
-			psmt.setString( 3, order.getCountry() );	
-			psmt.setString( 4, order.getAddress() );	
-			psmt.setString( 5, order.getDate() );	
-			psmt.setString( 6, order.getOrderPw() );	
-			psmt.setString( 7, order.getUserId() );	
-			psmt.setInt( 8, order.getTotalPrice() );	 
-			psmt.setString( 9, order.getPhone() );	
+			psmt = con.prepareStatement(sql);	
+			int count = 1;
+			psmt.setString( count++ , order.getShipName() );		
+			psmt.setString( count++, order.getZipCode() );		
+			psmt.setString( count++, order.getCountry() );	
+			psmt.setString( count++, order.getAddress() );	
+			psmt.setString( count++, order.getDate() );	
+			if (order.getOrderPw() != null && !order.getOrderPw().isEmpty() ) {
+				psmt.setString( count++, order.getOrderPw() );
+			}else {
+				psmt.setString( count++, order.getUserId() );
+			}
+			psmt.setInt( count++, order.getTotalPrice() );	
 			
 			result = psmt.executeUpdate();		// SQL 실행 요청, 적용된 데이터 개수를 받아온다.
-												// 게시글 1개 적용 성공 시, result : 1
-												// 				실패 시, result : 0
+												// 성공 시, result : 1
+												// 실패 시, result : 0
 			// executeUpdate()
 			// : SQL (INSERT, UPDATE, DELETE)을 실행하고 적용된 데이터 개수를 int 타입으로 반환
 		} catch (SQLException e) {

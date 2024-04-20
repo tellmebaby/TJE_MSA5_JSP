@@ -1,4 +1,5 @@
 
+<%@page import="shop.dao.ProductRepository"%>
 <%@page import="shop.dto.Order"%>
 <%@page import="shop.dto.Product"%>
 <%@page import="java.util.List"%>
@@ -17,40 +18,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shop🛒 - ALOHA CLASS🌴</title>
-<!-- 파비콘 -->
-<link rel="icon" href="/static/img/logo.png" type="image/x-icon">
-<!-- 썸네일 이미지 설정 -->
-<meta property="og:image" content="https://i.imgur.com/yiTQ3EV.jpg">
-<!-- 웹 페이지 설명 (선택 사항) -->
-<meta property="og:description" content="ALOHA CLASS🌴 - 쇼핑몰 프로젝트">
-<!-- 웹 페이지 URL -->
-<meta property="og:url" content="">
-<!-- 웹 페이지 제목 -->
-<meta name="title" content="Shop🛒 - ALOHA CLASS🌴">
-<meta property="og:title" content="Shop🛒 - ALOHA CLASS🌴">
-<!-- 웹 페이지 타입 (웹사이트, 기사, 제품 등) -->
-<meta property="og:type" content="website">
-<!-- 검색어 -->
-<meta name="keywords" content="쇼핑몰 프로젝트, 자바 웹개발, ALOHA CLASS, 알로하 클래스">
-<meta name="robots" content="index, follow">
-<!-- 사이트 맵 -->
-<link rel="sitemap" href="/static/sitemap.xml">
-
-
-
-
-	
-    
-<!-- bootstrap lib -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
-<!-- Noto Sans font -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&amp;display=swap">
-
-<!-- material design icon -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-<link href="/static/css/style.css" rel="stylesheet">
+	<jsp:include page="/layout/meta.jsp" />
+	<jsp:include page="/layout/link.jsp" />
 </head>
 <body>
 <% 
@@ -62,7 +31,7 @@
 	
 		// 주문 내역 목록을 세션에서 가져오기
 		OrderRepository orderDAO = new OrderRepository();
-		List<Product> orderList = orderDAO.list(id);
+		List<Order> orderList = orderDAO.list(id);
 		Order order = new Order();
 		String orderPhone = order.getPhone();
 		int orderCount = orderList.size();
@@ -166,8 +135,9 @@
 					<tbody>
 						<%
 							int sum = 0;
+							ProductRepository productDAO = new ProductRepository();
 							for(int i = 0 ; i < orderCount ; i++) {
-								Product product = orderList.get(i);
+								Product product = productDAO.getProductById(orderList.get(i).getShipName());
 								int total = product.getUnitPrice() * product.getQuantity();
 								sum += total;
 						%>
