@@ -9,10 +9,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	
-	
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shop🛒 - ALOHA CLASS🌴</title>
@@ -80,8 +76,8 @@
 					<td><%= product.getName() %></td>			
 					<td><%= unitPrice %></td>			
 					<td><%= quantity %></td>			
-					<td><%=subtotal%></td>			
-					<td><a href="deleteCart.jsp?id=<%=productId%>" class="btn btn-danger">삭제</a></td>			
+					<td><%= subtotal %></td>			
+					<td><a href="deleteCart.jsp?id=<%= productId %>" class="btn btn-danger">삭제</a></td>			
 				</tr>
 			
 			
@@ -93,28 +89,27 @@
 						<td></td>
 						<td></td>
 						<td>총액</td>
-						<td id="cart-sum"><%=cartSum%></td>
+						<td id="cart-sum"><%= cartSum %></td>
 						<td></td>
 					</tr>
 					
 				</tfoot>
 			</table>
-	
-			<!-- 버튼 영역 -->
-			<div class="d-flex justify-content-between align-items-center p-3">
-				<a href="deleteCart.jsp?cartId=<%=cartId%>" class="btn btn-lg btn-danger ">전체삭제</a>
-	
-				<a href="javascript:;" class="btn btn-lg btn-primary" onclick="order()">주문하기</a>
-			</div>
 			
+				<!-- 버튼 영역 -->
+				<div class="d-flex justify-content-between align-items-center p-3">
+					<a href="deleteCart.jsp?cartId=<%=cartId%>" class="btn btn-lg btn-danger ">전체삭제</a>
+		
+					<a href="javascript:;" class="btn btn-lg btn-primary" onclick="order()">주문하기</a>
+				</div>
 			<% } %>	
+			
 			
 				
 	</div>
 	
-	
 	<jsp:include page="/layout/footer.jsp" />
-<jsp:include page="/layout/script.jsp" />
+	<jsp:include page="/layout/script.jsp" />
 
 	<script>
 		let cartId = '<%=cartId%>'
@@ -133,27 +128,6 @@
 			}
 			
 		}
-		
-
 	</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>
