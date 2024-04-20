@@ -9,6 +9,7 @@ public class Ship {
 	private String zipCode;
 	private String address;
 	private String phone;
+	private int quantity;
 	
 	public Ship() {
 		
@@ -70,11 +71,21 @@ public class Ship {
 		this.phone = phone;
 	}
 
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 	@Override
 	public String toString() {
 		return "Ship [cartId=" + cartId + ", shipName=" + shipName + ", date=" + date + ", country=" + country
-				+ ", zipCode=" + zipCode + ", address=" + address + ", phone=" + phone + "]";
+				+ ", zipCode=" + zipCode + ", address=" + address + ", phone=" + phone + ", quantity=" + quantity + "]";
 	}
+
+	
 
 	
 	

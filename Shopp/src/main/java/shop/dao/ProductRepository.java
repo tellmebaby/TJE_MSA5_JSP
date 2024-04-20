@@ -162,8 +162,8 @@ public class ProductRepository extends JDBConnection {
 	public int insert(Product product) {
 		int result = 0;
 		
-		String sql = " INSERT INTO product (product_id, name, unit_price, description, manufacturer, category, units_in_stock, `condition`, file) "
-				   + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ? ) ";
+		String sql = " INSERT INTO product (product_id, name, unit_price, description, manufacturer, category, units_in_stock, `condition`, file) " 
+				   + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 		
 		try {
 			psmt = con.prepareStatement(sql);			
@@ -199,38 +199,34 @@ public class ProductRepository extends JDBConnection {
 		
 		int result = 0;
 			
-		String sql = " UPDATE board "
-				   + " SET name = ? "
-				   + "    ,unit_price  = ? "
-				   + "	  ,description = ? "
-				   + "	  ,manufacturer = ? "
-				   + "	  ,category = ? "
-				   + "	  ,units_in_stock = ? "
-				   + "	  ,condition = ? "
-				   + "	  ,file = ? "
-				   + "	  ,quantity = ? "
-				   + " WHERE product_id = ? ";
-		
+		 String sql = "UPDATE product SET name = ?, unit_price = ?, description = ?, manufacturer = ?, category = ?, units_in_stock = ?, `condition` = ?";
+		 if (product.getFile() != null && !product.getFile().isEmpty()) {
+		        sql += ", file = ? ";
+		    }
+		 	sql += "WHERE product_id = ?";
+		 	System.out.println("sql문 어떠니 : " + sql);
 		try {
-			psmt = con.prepareStatement(sql);			
-			psmt.setString( 1, product.getName() );		
-			psmt.setInt( 2, product.getUnitPrice() );		
-			psmt.setString( 3, product.getDescription() );	
-			psmt.setString( 4, product.getManufacturer() );			
-			psmt.setString( 5, product.getCategory() );			
-			psmt.setLong( 6, product.getUnitsInStock() );			
-			psmt.setString( 7, product.getCondition() );			
-			psmt.setString( 8, product.getFile() );			
-			psmt.setInt( 9, product.getQuantity() );			
-			psmt.setString( 10, product.getProductId() );			
-			
+			psmt = con.prepareStatement(sql);
+	        int index = 1;
+	        psmt.setString(index++, product.getName());
+	        psmt.setInt(index++, product.getUnitPrice());
+	        psmt.setString(index++, product.getDescription());
+	        psmt.setString(index++, product.getManufacturer());
+	        psmt.setString(index++, product.getCategory());
+	        psmt.setLong(index++, product.getUnitsInStock());
+	        psmt.setString(index++, product.getCondition());		
+	        if (product.getFile() != null && !product.getFile().isEmpty()) {
+	            psmt.setString(index++, product.getFile());
+	        }
+	        psmt.setString(index, product.getProductId());
+	        
 			result = psmt.executeUpdate();		// SQL 실행 요청, 적용된 데이터 개수를 받아온다.
-												// 게시글 1개 적용 성공 시, result : 1
-												// 				실패 시, result : 0
+												// result : 1
+												// result : 0
 			// executeUpdate()
 			// : SQL (INSERT, UPDATE, DELETE)을 실행하고 적용된 데이터 개수를 int 타입으로 반환
 		} catch (SQLException e) {
-			System.err.println("게시글 수정 시, 예외 발생");
+			System.err.println("상품 수정 시, 예외 발생");
 			e.printStackTrace();
 		}
 		return result;

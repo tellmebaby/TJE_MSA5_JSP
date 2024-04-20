@@ -16,9 +16,9 @@
 		- text/plain						: 공백만 + 로 변환, 나머지는 인코딩하지 않음
 	 -->
 	<!-- jsp 로 파일 업로드 처리 -->
-<!-- 	<form action="fileupload01_pro.jsp" method="post" enctype="multipart/form-data"> -->
+	<form action="fileupload01_pro.jsp" method="post" enctype="multipart/form-data">
 	<!-- Servlet 으로 파일 업로드 처리 -->
-	<form action="<%= request.getContextPath() %>/fileupload/cos" method="post" enctype="multipart/form-data">
+<%-- 	<form action="<%= request.getContextPath() %>/fileupload/cos" method="post" enctype="multipart/form-data"> --%>
 		<p>이 름 : <input type="text" name="name"> </p>	
 		<p>제 목 : <input type="text" name="title"> </p>	
 		<!-- multiple : 여러 파일을 선택하도록 지정 -->
