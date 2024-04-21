@@ -49,6 +49,7 @@
 			 List<Ship> cart = (List<Ship>) session.getAttribute("cart");
 			  
 			
+			int cartSum = 0;
 			if (cart == null || cart.isEmpty()) { %>
 				<tr>
 					<td colspan="5">추가된 상품이 없습니다.</td>
@@ -64,7 +65,6 @@
 					cartId = ship.getCartId();
 				}
 				
-				int cartSum = 0;
 				for (String productId : productCountMap.keySet()) {
 					
 					Product product = productDAO.getProductById(productId);
@@ -82,8 +82,9 @@
 					<td><a href="deleteCart.jsp?id=<%= productId %>" class="btn btn-danger">삭제</a></td>			
 				</tr>
 			
+				<% } %>
 			
-			<% } %>
+			<% } %>	
 				</tbody>
 				<tfoot>
 					
@@ -104,7 +105,6 @@
 		
 					<a href="javascript:;" class="btn btn-lg btn-primary" onclick="order()">주문하기</a>
 				</div>
-			<% } %>	
 			
 			
 				

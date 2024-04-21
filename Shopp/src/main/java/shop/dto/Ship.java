@@ -3,6 +3,7 @@ package shop.dto;
 public class Ship {
 	
 	private String cartId;
+	private int orderNo;
 	private String shipName;
 	private String date;
 	private String country;
@@ -13,6 +14,14 @@ public class Ship {
 	
 	public Ship() {
 		
+	}
+
+	public int getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
 	}
 
 	public String getCartId() {
@@ -81,9 +90,12 @@ public class Ship {
 
 	@Override
 	public String toString() {
-		return "Ship [cartId=" + cartId + ", shipName=" + shipName + ", date=" + date + ", country=" + country
-				+ ", zipCode=" + zipCode + ", address=" + address + ", phone=" + phone + ", quantity=" + quantity + "]";
+		return "Ship [cartId=" + cartId + ", orderNo=" + orderNo + ", shipName=" + shipName + ", date=" + date
+				+ ", country=" + country + ", zipCode=" + zipCode + ", address=" + address + ", phone=" + phone
+				+ ", quantity=" + quantity + "]";
 	}
+
+	
 
 	
 

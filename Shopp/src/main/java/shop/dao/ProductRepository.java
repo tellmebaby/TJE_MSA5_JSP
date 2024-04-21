@@ -153,6 +153,47 @@ public class ProductRepository extends JDBConnection {
 				return product;
 	}
 	
+	public Product getProductByName(String shipName) {
+		Product product = new Product();
+		
+		// SQL 작성
+				String sql = " SELECT * "
+						   + " FROM product "
+						   + " WHERE name = ? ";
+				try {
+					// 쿼리(SQL) 실행 객체 생성 - PreparedStatement (psmt)
+					psmt = con.prepareStatement(sql);
+					
+					// psmt.setXXX( 순서번호, 매핑할 값 );
+					psmt.setString( 1, shipName );		// ?(1) <-- no (글번호)
+					
+					// 쿼리(SQL) 실행 -> 결과  - ResultSet (rs)
+					rs = psmt.executeQuery();
+					
+					// 조회 결과를 1건 가져오기
+					if( rs.next() ) {		// next() : 실행 결과의 다음 데이터로 이동
+						// 결과 데이터 가져오기
+						// rs.getXXX("컬럼명") --> 해당 컬럼의 데이터를 가져온다
+						// * "컬럼명"의 값을 특정 타입으로 변환
+						product.setProductId( rs.getString("product_id") );
+						product.setName( rs.getString("name") );
+						product.setUnitPrice( rs.getInt("unit_price") );
+						product.setDescription( rs.getString("description") );
+						product.setManufacturer( rs.getString("manufacturer") );
+						product.setCategory( rs.getString("category") );
+						product.setUnitsInStock( rs.getLong("units_in_stock") );
+						product.setCondition( rs.getString("condition") );
+						product.setFile( rs.getString("file") );
+						product.setQuantity( rs.getInt("quantity") );
+						
+					}
+				} catch(SQLException e) {
+					System.err.println("게시글 조회 시, 예외 발생");
+					e.printStackTrace();
+				}
+				// 게시글 정보 1건 반환
+				return product;
+	}
 	
 	/**
 	 * 상품 등록

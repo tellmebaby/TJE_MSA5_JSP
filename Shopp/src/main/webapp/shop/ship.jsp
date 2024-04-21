@@ -55,19 +55,7 @@
 				<label class="input-group-text col-md-2" id="">전화번호</label>
 				<input type="text" class="form-control col-md-10" name="phone" value="">
 			</div>
-			<!-- 비회원인경우 -->
-			<% if (userId != null && !userId.isEmpty()) { %>
-
-				<input type="hidden" name="userId" value="<%=userId%>">
-
-			<%} else { %>
 			
-			<div class="input-group mb-3 row">
-				<label class="input-group-text col-md-2" id="">주문비밀번호</label>
-				<input type="text" class="form-control col-md-10" name="orderPw" value="">
-			</div>
-			
-			<%} %>
 			<!-- 버튼 영역 -->
 			<div class="d-flex justify-content-between mt-5 mb-5">
 				<div class="item">

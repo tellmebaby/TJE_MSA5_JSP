@@ -1,5 +1,7 @@
 package shop.dto;
 
+import java.util.List;
+
 /**
  * 주문 데이터
  */
@@ -16,10 +18,39 @@ public class Order {
 	private int totalPrice;
 	private String phone;
 	private String orderPw;
+	private Product product;
+	private List<Product> productList;
+	
 	
 	public Order() {
 		
 	}
+
+	
+	
+	public List<Product> getProductList() {
+		return productList;
+	}
+
+
+
+	public void setProductList(List<Product> productList) {
+		this.productList = productList;
+	}
+
+
+
+	public Product getProduct() {
+		return product;
+	}
+
+
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+
 
 	public int getOrderNo() {
 		return orderNo;
@@ -109,12 +140,21 @@ public class Order {
 		this.orderPw = orderPw;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", cartId=" + cartId + ", shipName=" + shipName + ", zipCode=" + zipCode
 				+ ", country=" + country + ", address=" + address + ", date=" + date + ", userId=" + userId
-				+ ", totalPrice=" + totalPrice + ", phone=" + phone + ", orderPw=" + orderPw + "]";
+				+ ", totalPrice=" + totalPrice + ", phone=" + phone + ", orderPw=" + orderPw + ", product=" + product
+				+ ", productList=" + productList + "]";
 	}
+
+
+
+	
+
+	
 	
 	
 }

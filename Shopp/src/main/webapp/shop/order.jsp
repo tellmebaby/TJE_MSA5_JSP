@@ -1,3 +1,10 @@
+<%@page import="shop.dto.Order"%>
+<%@page import="shop.dao.ProductRepository"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="shop.dto.Ship"%>
+<%@page import="java.util.List"%>
+<%@page import="shop.dto.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,7 +21,12 @@
 	<jsp:include page="/layout/link.jsp" />
 </head>
 <body>   
-	
+	<%
+		String root = request.getContextPath();
+		String cartId="";
+		Order order = (Order) session.getAttribute("nonUserInfo");
+		String loginId = (String) session.getAttribute("loginId");
+	%>
 	<jsp:include page="/layout/header.jsp" />
 	
 
@@ -34,33 +46,38 @@
 				</tr>
 				<tr>
 					<td>성 명 :</td>
-					<td>홍길동</td>
+					<td><%=order.getShipName() %></td>
 				</tr>
 				<tr>
 					<td>우편번호 :</td>
-					<td>12345</td>
+					<td><%=order.getZipCode()%></td>
 				</tr>
 				<tr>
 					<td>주소 :</td>
-					<td>서울특별시 강남구 신사동 123번지</td>
+					<td><%=order.getAddress() %></td>
 				</tr>
 				<tr>
 					<td>배송일 :</td>
-					<td>20240417</td>
+					<td><%=order.getDate() %></td>
 				</tr>
 				<tr>
 					<td>전화번호 :</td>
-					<td>01012345678</td>
+					<td><%=order.getPhone() %></td>
 				</tr>
-				
+				<%
+				if ( loginId == null) {
+				%>	
 				<tr>
 					<td>주문 비밀번호 :</td>
 					<td>
 						<input type="password" class="form-control" name="orderPw">
 					</td>
 				</tr>
-				
-			</tbody></table>
+				<% 
+				}
+				%>				
+				</tbody>
+			</table>
 		</div>
 		
 		<!-- 주문목록 -->
@@ -76,15 +93,45 @@
 					</tr>
 				</thead>
 				<tbody>
+				<%
+			 List<Ship> cart = (List<Ship>) session.getAttribute("cart");
+			  ProductRepository productDAO = new ProductRepository();
+			int totalQuantity = 0;
+			int totalPrice = 0;
+			if (cart == null || cart.isEmpty()) { %>
+				<tr>
+					<td colspan="5">추가된 상품이 없습니다.</td>
+				</tr>
+			<% } else {
+				
+				Map<String, Integer> productCountMap = new HashMap<>();
+				
+				for (Ship ship : cart) { 
+					String productId = ship.getShipName();
+					int count = productCountMap.getOrDefault(productId, 0);
+					productCountMap.put(productId, count + ship.getQuantity());
+					cartId = ship.getCartId();
+				}
+				
+				int cartSum = 0;
+				for (String productId : productCountMap.keySet()) {
 					
+					Product product = productDAO.getProductById(productId);
+					int unitPrice = product.getUnitPrice() != null ? product.getUnitPrice().intValue() : 0;
+					int quantity  = productCountMap.get(productId);
+					int subtotal = unitPrice * quantity;
+					totalQuantity += quantity;
+					totalPrice += subtotal;
+					cartSum += subtotal;
+				%>
 					<tr>
-						<td>자바 프로그래밍</td>			
-						<td>50000</td>			
-						<td>1</td>			
-						<td>50000</td>			
+						<td><%= product.getName() %></td>			
+						<td><%= unitPrice %></td>			
+						<td><%= quantity %></td>			
+						<td><%= subtotal %></td>			
 						<td></td>			
 					</tr>
-					
+				<% } %>
 				</tbody>
 				<tfoot>
 					
@@ -92,13 +139,13 @@
 						<td></td>
 						<td></td>
 						<td>총액</td>
-						<td>50000</td>
+						<td><%=totalPrice%></td>
 						<td></td>
 					</tr>
 					
 				</tfoot>
 			</table>
-	
+			<% } %>	
 		</div>
 		
 		<!-- 버튼 영역 -->
@@ -109,8 +156,15 @@
 				<a href="" class="btn btn-lg btn-danger">취소</a>				
 			</div>
 			<div class="item">
+				<%
+				if ( loginId != null) {
+				%>	
+						<input type="hidden" name="loginId" value="<%=loginId%>">
+				<% 
+				}
+				%>
 				<input type="hidden" name="login" value="false">
-				<input type="hidden" name="totalPrice" value="50000">
+				<input type="hidden" name="totalPrice" value="<%=totalPrice%>">
 				<input type="submit" class="btn btn-lg btn-primary" value="주문완료">	
 			</div>
 		</div>

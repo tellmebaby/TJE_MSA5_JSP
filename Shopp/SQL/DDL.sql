@@ -95,6 +95,16 @@ CREATE TABLE `order` (
   PRIMARY KEY (`order_no`)
 ) COMMENT='주문';
 
+CREATE TABLE ship (
+    order_no INT AUTO_INCREMENT PRIMARY KEY,
+    product VARCHAR(255) NOT NULL,
+    price INT NOT NULL,
+    quantity INT NOT NULL,
+    subtotal INT NOT NULL,
+    note VARCHAR(255),
+    user_id VARCHAR(50),
+    phone VARCHAR(20)
+);
 
 
 -- 입출고 테이블

@@ -16,6 +16,7 @@ public class ProductIORepository extends JDBConnection {
 	 */
 	public int insert(Product product) {
 		
+		// order 안에 있는것들 
 		int result = 0;
 		String sql = " INSERT INTO product_io ( product_id, order_no, amount, type, user_id ) "
 				   + " VALUES( ?, ?, ?, ?, ? ) ";

@@ -45,7 +45,7 @@ public class UserRepository extends JDBConnection {
 	
 	
 	/**
-	 * 로그인을 위한 사용자 조회
+	 * 로그인
 	 * @param id
 	 * @param pw
 	 * @return
