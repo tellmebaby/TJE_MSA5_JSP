@@ -94,7 +94,7 @@
 				<h1 class="display-5 fw-bold text-body-emphasis">회원 정보 수정</h1>
 			</div>
 			
-			<!-- 회원 가입 영역 -->
+			<!-- 회원 정보 수정 영역 -->
 			<div class="container shop m-auto mb-5">
 				<form action="update_pro.jsp" name="updateForm" method="post" >
 				
@@ -102,7 +102,7 @@
 						<label class="input-group-text col-md-2" id="">아이디</label>
 						<input type="text" class="form-control col-md-10" 
 							   name="id" placeholder="아이디" required
-							   value="<%= loginUser.getId() %>">
+							   value="<%= loginUser.getId() %>" readonly="true">
 					</div>
 					
 					<div class="input-group mb-3 row">

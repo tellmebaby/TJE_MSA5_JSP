@@ -11,24 +11,17 @@
 </head>
 <body>   
 	<%
-	String id = request.getParameter("id");
-	String pw = request.getParameter("pw");
-	
+	String loginId = (String) session.getAttribute("loginId");
 	String root = request.getContextPath();
-	
-	UserRepository userDAO = new  UserRepository();
-	User loginUser = userDAO.login(id, pw);
 	
 	
 	boolean login ;
-	if(loginUser == null){
-	// 로그인 실패
-	login=false;
-	out.print("로그인 실패했습니다.");
-	}else{
+	if( loginId != null && !loginId.isEmpty() ){
 	// 로그인 성공
 	login=true;
-	out.print("로그인 성공했습니다.");
+	}else{
+	// 로그인 실패
+	login=false;
 	}
 	%>
 	

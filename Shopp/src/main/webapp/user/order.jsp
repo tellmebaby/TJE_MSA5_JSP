@@ -27,29 +27,29 @@
 <body>
 	<%
 	// ...
-	String id = request.getParameter("id");
-	String pw = request.getParameter("pw");
 	String root = request.getContextPath();
+	String loginId = (String) session.getAttribute("loginId");
 
 	// 주문 내역 목록을 세션에서 가져오기
 	List<Order> orderList = (List<Order>) session.getAttribute("orderList");
 	String orderPhone = null;
 	if (orderList != null && !orderList.isEmpty()){
 		 orderPhone = orderList.get(0).getPhone();
+	}else{
+		OrderRepository orderDAO = new OrderRepository();
+		orderList = orderDAO.list(loginId);
 	}
 	// 회원인 경우
-	UserRepository userDAO = new UserRepository();
-	User loginUser = userDAO.login(id, pw);
 
 	boolean login;
 
-	if (loginUser == null) {
-		// 로그인 실패
-		login = false;
-
-	} else {
+	if ( loginId != null && !loginId.isEmpty() ) {
 		// 로그인 성공
 		login = true;
+
+	} else {
+		// 로그인 실패
+		login = false;
 
 	}
 	%>
@@ -123,7 +123,8 @@
 				</form>
 				<%
 				if (login || (orderPhone != null && !orderPhone.isEmpty())) {
-					OrderRepository orderDAO = new OrderRepository();
+					
+					
 				%>
 				<!-- 주문 내역 목록 -->
 				<table
@@ -142,6 +143,7 @@
 						<%
 						ProductRepository productDAO = new ProductRepository();
 						int totalQuantity = 0;
+						
 						if (orderList == null || orderList.isEmpty()) {
 						%>
 						<tr>
@@ -159,15 +161,15 @@
 								if (productIo != null) { // 상품이 널(null)인지 체크
 								// order 에 product를 넣었다 까지
 								int unitPrice = productIo.getUnitPrice();
-								int quantity = productIo.getQuantity();
-								int subTotal = unitPrice * quantity;
+								int amount = productIo.getAmount();
+								int subTotal = unitPrice * amount;
 								sum += subTotal;
 						%>
 						<tr>
 							<td><%=order.getOrderNo()%></td>
-							<td><%=order.getShipName()%></td>
+							<td><%=productIo.getName()%></td>
 							<td><%=productIo.getUnitPrice()%></td>
-							<td><%=productIo.getQuantity()%></td>
+							<td><%=amount %></td>
 							<td><%=subTotal%></td>
 							<td></td>
 						</tr>

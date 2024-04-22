@@ -29,7 +29,7 @@
 	
 	// 세션에 주문자 정보 세팅
 	
-	session.setAttribute("nonUserInfo", order);
+	session.setAttribute("userInfo", order);
 	
 
 	

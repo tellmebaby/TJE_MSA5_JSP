@@ -1,3 +1,5 @@
+<%@page import="shop.dto.User"%>
+<%@page import="shop.dao.UserRepository"%>
 <%@page import="shop.dto.Ship"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,10 +15,15 @@
 </head>
 <body>   
 	<%
+		String loginId = (String) session.getAttribute("loginId");
+		User user = new User();
+		if(loginId != null && !loginId.isEmpty()){
+			UserRepository userDAO = new UserRepository();
+			user = userDAO.getUserById(loginId);	
+		}
 		String root = request.getContextPath();
 	 	String productId = request.getParameter("id");
 	 	String cartId = request.getParameter("cartId");
-	 	String userId = (String) session.getAttribute("userId");
 	 	List<Ship> cart = (List<Ship>) session.getAttribute("cart");
  	
 	%>
@@ -33,7 +40,15 @@
 			<input type="hidden" name="cartId" value="<%=cartId%>">
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">성명</label>
+				<%
+				if (loginId != null && !loginId.isEmpty()){
+				%>
+				<input type="text" class="form-control col-md-10" name="name" value="<%=user.getName()%>">
+				<%
+				}else{
+				%>
 				<input type="text" class="form-control col-md-10" name="name" value="">
+			<% } %>
 			</div>
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">배송일</label>
@@ -49,11 +64,27 @@
 			</div>
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">주소</label>
+				<%
+				if (loginId != null && !loginId.isEmpty()){
+				%>
+				<input type="text" class="form-control col-md-10" name="addressName" value="<%=user.getAddress()%>">
+				<%
+				}else{
+				%>
 				<input type="text" class="form-control col-md-10" name="addressName" value="">
+				<% } %>
 			</div>
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">전화번호</label>
+				<%
+				if (loginId != null && !loginId.isEmpty()){
+				%>
+				<input type="text" class="form-control col-md-10" name="phone" value="<%=user.getPhone()%>">
+				<%
+				}else{
+				%>
 				<input type="text" class="form-control col-md-10" name="phone" value="">
+				<% } %>
 			</div>
 			
 			<!-- 버튼 영역 -->

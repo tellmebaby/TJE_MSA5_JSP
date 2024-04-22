@@ -26,25 +26,28 @@ public class OrderRepository extends JDBConnection {
 			}else {
 				sql += ",user_id "	
 					+ " , total_price , phone) "
-					+ " VALUES (?,?,?,?,?,?,?) ";	
+					+ " VALUES (?,?,?,?,?,?,?,?) ";	
 			}
 					
 		
 		try {
 			psmt = con.prepareStatement(sql);	
-			int count = 1;
-			psmt.setString( count++, order.getShipName() );		
-			psmt.setString( count++, order.getZipCode() );		
-			psmt.setString( count++, order.getCountry() );	
-			psmt.setString( count++, order.getAddress() );	
-			psmt.setString( count++, order.getDate() );	
-			if (order.getOrderPw() != null && !order.getOrderPw().isEmpty() ) {
-				psmt.setString( count++, order.getOrderPw() );
-			}else {
-				psmt.setString( count++, order.getUserId() );
+			psmt.setString(1, order.getShipName());		
+			psmt.setString(2, order.getZipCode());		
+			psmt.setString(3, order.getCountry());	
+			psmt.setString(4, order.getAddress());	
+			psmt.setString(5, order.getDate());
+
+			// order_pw 또는 user_id에 따라 매개 변수를 처리
+			if (order.getOrderPw() != null && !order.getOrderPw().isEmpty()) {
+			    psmt.setString(6, order.getOrderPw());
 			}
-			psmt.setInt( count++, order.getTotalPrice() );	
-			psmt.setString( count, order.getPhone() );	
+			else {
+			    psmt.setString(6, order.getUserId());
+			}
+
+			psmt.setInt(7, order.getTotalPrice());	
+			psmt.setString(8, order.getPhone());	
 			
 			result = psmt.executeUpdate();		// SQL 실행 요청, 적용된 데이터 개수를 받아온다.
 												// 성공 시, result : 1
@@ -147,7 +150,7 @@ public class OrderRepository extends JDBConnection {
 					+ " FROM joeun.order AS o "
 					+ " JOIN product_io AS pio ON o.order_no = pio.order_no "
 					+ " JOIN product AS p ON pio.product_id = p.product_id "
-					+ " WHERE user_id = ? " ;
+					+ " WHERE o.user_id = ? " ;
 		try {
 			// 쿼리(SQL) 실행 객체 생성 - PreparedStatement (psmt)
 			psmt = con.prepareStatement(sql);
@@ -189,6 +192,7 @@ public class OrderRepository extends JDBConnection {
 	            product.setCondition(rs.getString("condition"));
 	            product.setFile(rs.getString("file"));
 	            product.setQuantity(rs.getInt("quantity"));
+	            product.setAmount(rs.getInt("amount"));
 				
 	            // 주문 정보에 상품 추가
 	            order.setProduct(product);
@@ -197,7 +201,7 @@ public class OrderRepository extends JDBConnection {
 				orderList.add(order);
 			}
 		} catch(SQLException e) {
-			System.err.println("비회원주문 내역 조회시, 예외 발생");
+			System.err.println("회원주문 내역 조회시, 예외 발생");
 			e.printStackTrace();
 		}
 		return orderList;
@@ -260,6 +264,7 @@ public class OrderRepository extends JDBConnection {
 	            product.setCondition(rs.getString("condition"));
 	            product.setFile(rs.getString("file"));
 	            product.setQuantity(rs.getInt("quantity"));
+	            product.setAmount(rs.getInt("amount"));
 				
 	            // 주문 정보에 상품 추가
 	            

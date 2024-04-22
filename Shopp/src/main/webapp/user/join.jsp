@@ -25,9 +25,9 @@
 			</div>
 			
 			<div class="input-group mb-3 row">
-				<label class="input-group-text col-md-4" id="">비밀번호</label>
-				<input type="password" class="form-control col-md-8" 
-					   name="pw" placeholder="비밀번호" required>
+				<label class="input-group-text col-md-4" id="" >비밀번호</label>
+				<input style="font-size: 0.7rem;"type="password" class="form-control col-md-8" 
+					   name="pw" placeholder="비밀번호는 6글자이상의 특수문자가 포함된 영문자,숫자를 입력해주세요" required>
 			</div>
 			
 			<div class="input-group mb-3 row">
@@ -144,5 +144,73 @@
 	
 	<jsp:include page="/layout/footer.jsp" />
 	<jsp:include page="/layout/script.jsp" />
+	
+	<script>
+	// 성별 체크
+	document.forms["joinForm"].addEventListener("submit", function(event) {
+	    var selectedGender = document.querySelector('input[name="gender"]:checked');
+	    if (selectedGender) {
+	        var genderValue = selectedGender.value;
+	        // 체크된 라디오 버튼의 값을 form 데이터에 추가
+	        var hiddenInput = document.createElement("input");
+	        hiddenInput.setAttribute("type", "hidden");
+	        hiddenInput.setAttribute("name", "selectedGender");
+	        hiddenInput.setAttribute("value", genderValue);
+	        this.appendChild(hiddenInput);
+	    } else {
+	        // 어떤 라디오 버튼도 체크되지 않은 경우 처리
+	        alert("성별을 선택해주세요.");
+	        event.preventDefault(); // form 제출을 중단합니다.
+	    }
+	});
+	
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form[name="joinForm"]');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // 폼 제출 막기
+            
+            // 필드 값 가져오기
+            const id = form.elements['id'].value;
+            const pw = form.elements['pw'].value;
+            const pw_confirm = form.elements['pw_confirm'].value;
+            const name = form.elements['name'].value;
+            const gender = form.querySelector('input[name="gender"]:checked');
+            const year = form.elements['year'].value;
+            const month = form.elements['month'].value;
+            const day = form.elements['day'].value;
+            const email1 = form.elements['email1'].value;
+            const email2 = form.elements['email2'].value;
+            const phone = form.elements['phone'].value;
+            const address = form.elements['address'].value;
+            
+            // 입력 유효성 검사
+            const errors = [];
+            if (!/^[a-zA-Z가-힣]/.test(id)) {
+                errors.push('아이디는 영문자 또는 한글로 시작해야 합니다.');
+            }
+            if (!/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{6,}$/.test(pw)) {
+                errors.push('비밀번호는 영문자, 숫자, 특수문자를 모두 포함해야 하며, 특수문자를 1개 이상 포함하고 6글자 이상이어야 합니다.');
+            }
+            if (pw !== pw_confirm) {
+                errors.push('비밀번호와 비밀번호 확인 값이 일치하지 않습니다.');
+            }
+            if (!/^[가-힣]+$/.test(name)) {
+                errors.push('이름은 한글만 입력 가능합니다.');
+            }
+            
+            // 오류가 있는 경우 처리
+            if (errors.length > 0) {
+                errors.forEach(error => {
+                    alert(error); // 혹은 오류 메시지를 인풋 창에 빨간색으로 표시하는 등의 UI 처리 가능
+                });
+                return; // 폼 제출 중단
+            }
+            
+            // 유효성 검사 통과 시, 폼 제출
+            form.submit();
+        });
+    });
+    
+	</script>
 </body>
 </html>

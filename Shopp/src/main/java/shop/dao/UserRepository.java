@@ -17,7 +17,7 @@ public class UserRepository extends JDBConnection {
 	public int insert(User user) {
 		int result = 0;
 		
-		String sql = " INSERT INTO product (id, password, name, gender, birth, mail, phone, address ) "
+		String sql = " INSERT INTO joeun.user (id, password, name, gender, birth, mail, phone, address ) "
 				   + " VALUES(?, ?, ?, ?, ?, ?, ?, ? ) ";
 		
 		try {
@@ -28,8 +28,8 @@ public class UserRepository extends JDBConnection {
 			psmt.setString( 4, user.getGender() );	
 			psmt.setString( 5, user.getBirth() );	
 			psmt.setString( 6, user.getMail() );	
-			psmt.setString( 7, user.getMail() );	
-			psmt.setString( 8, user.getPhone() );	
+			psmt.setString( 7, user.getPhone() );	
+			psmt.setString( 8, user.getAddress() );	
 			
 			result = psmt.executeUpdate();		// SQL 실행 요청, 적용된 데이터 개수를 받아온다.
 												// 성공 시, result : 1
@@ -102,7 +102,6 @@ public class UserRepository extends JDBConnection {
 	/**
 	 * 로그인을 위한 사용자 조회
 	 * @param id
-	 * @param pw
 	 * @return
 	 */
 	public User getUserById(String id) {
@@ -111,7 +110,7 @@ public class UserRepository extends JDBConnection {
 
 // SQL 작성
 		String sql = " SELECT * "
-				   + " FROM user "
+				   + " FROM joeun.user "
 				   + " WHERE id = ? ";
 		try {
 			// 쿼리(SQL) 실행 객체 생성 - PreparedStatement (psmt)
@@ -137,15 +136,15 @@ public class UserRepository extends JDBConnection {
 				user.setPhone(rs.getString("phone") );
 				user.setAddress(rs.getString("address") );
 				user.setRegistDay(rs.getString("regist_day") );
-				return user;
+				
 			}
-			return null;
+			
 		} catch(SQLException e) {
-			System.err.println("로그인 시, 예외 발생");
+			System.err.println("회원정보 조회시, 예외 발생");
 			e.printStackTrace();
 		}
 			
-		return null;
+		return user;
 	}
 	
 	
@@ -157,9 +156,8 @@ public class UserRepository extends JDBConnection {
 	public int update(User user) {
 		int result = 0;
 		
-		String sql = " UPDATE user "
-				   + " SET password = ? "
-				   + "    ,name  = ? "
+		String sql = " UPDATE joeun.user "
+				   + " SET name  = ? "
 				   + "	  ,gender = ? "
 				   + "	  ,birth = ? "
 				   + "	  ,mail = ? "
@@ -168,15 +166,14 @@ public class UserRepository extends JDBConnection {
 				   + " WHERE id = ? ";
 		
 		try {
-			psmt = con.prepareStatement(sql);			
-			psmt.setString( 1, user.getPassword() );		
-			psmt.setString( 2, user.getName() );		
-			psmt.setString( 3, user.getGender() );	
-			psmt.setString( 4, user.getBirth() );			
-			psmt.setString( 5, user.getMail() );			
-			psmt.setString( 6, user.getPhone() );			
-			psmt.setString( 7, user.getAddress() );			
-			psmt.setString( 8, user.getId() );			
+			psmt = con.prepareStatement(sql);				
+			psmt.setString( 1, user.getName() );		
+			psmt.setString( 2, user.getGender() );	
+			psmt.setString( 3, user.getBirth() );			
+			psmt.setString( 4, user.getMail() );			
+			psmt.setString( 5, user.getPhone() );			
+			psmt.setString( 6, user.getAddress() );			
+			psmt.setString( 7, user.getId() );			
 			
 			result = psmt.executeUpdate();		// SQL 실행 요청, 적용된 데이터 개수를 받아온다.
 												// 성공 시, result : 1

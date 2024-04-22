@@ -14,9 +14,12 @@
 <body>
 	<%
 		String root = request.getContextPath();
+		String keyword = request.getParameter("keyword");
 		ProductRepository productDAO = new ProductRepository();
 		List<Product> productList = productDAO.list();
-		
+		if( keyword != null && !keyword.isEmpty() ) {
+           productList = productDAO.list(keyword);
+		}
 	%>
 	<jsp:include page="/layout/header.jsp" />
 

@@ -68,13 +68,13 @@ public class ProductRepository extends JDBConnection {
 				// SQL 작성
 				String sql = " SELECT * "
 						   + " FROM product "
-						   + " WHERE name = ? ";
+						   + " WHERE name LIKE ? ";
 				try {
 					// 쿼리(SQL) 실행 객체 생성 - PreparedStatement (psmt)
 					psmt = con.prepareStatement(sql);
 					
 					// psmt.setXXX( 순서번호, 매핑할 값 );
-					psmt.setString( 1, keyword );		// ?(1) <-- no (글번호)
+					psmt.setString( 1, "%" + keyword + "%" );		// ?(1) <-- no (글번호)
 					
 					// 쿼리(SQL) 실행 -> 결과  - ResultSet (rs)
 					rs = psmt.executeQuery();
@@ -185,6 +185,7 @@ public class ProductRepository extends JDBConnection {
 						product.setCondition( rs.getString("condition") );
 						product.setFile( rs.getString("file") );
 						product.setQuantity( rs.getInt("quantity") );
+						product.setAmount( rs.getInt("amount"));
 						
 					}
 				} catch(SQLException e) {

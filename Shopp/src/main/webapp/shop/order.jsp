@@ -24,7 +24,7 @@
 	<%
 		String root = request.getContextPath();
 		String cartId="";
-		Order order = (Order) session.getAttribute("nonUserInfo");
+		Order order = (Order) session.getAttribute("userInfo");
 		String loginId = (String) session.getAttribute("loginId");
 	%>
 	<jsp:include page="/layout/header.jsp" />
@@ -42,7 +42,13 @@
 			<table class="table ">
 				<tbody><tr>
 					<td>주문 형태 :</td>
+					<%
+					if(loginId!=null&&!loginId.isEmpty()){
+					%>
+					<td>회원 주문</td>
+					<% } else { %>
 					<td>비회원 주문</td>
+					<% } %>
 				</tr>
 				<tr>
 					<td>성 명 :</td>

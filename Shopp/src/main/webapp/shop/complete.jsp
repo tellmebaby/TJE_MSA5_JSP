@@ -25,15 +25,18 @@
 	
 	<%
 		String root = request.getContextPath();
+		String loginId = (String) session.getAttribute("loginId");
 		OrderRepository orderDAO = new OrderRepository();
 		String orderPw = request.getParameter("orderPw");
 		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
-		Order getOrder = (Order) session.getAttribute("nonUserInfo");
+		Order getOrder = (Order) session.getAttribute("userInfo");
 		getOrder.setTotalPrice(totalPrice);
 		if(orderPw != null ) {
 			getOrder.setOrderPw(orderPw);
 		}else{
-			getOrder.setUserId(request.getParameter("loginId"));
+			if(loginId != null && !loginId.isEmpty()){
+			 getOrder.setUserId(loginId);
+			}
 		}
 				
 		int result = orderDAO.insert(getOrder);
@@ -60,7 +63,7 @@
 			}
 			// 주문이 성공하면 세션에서 다 지워준다
 			session.removeAttribute("cart");
-			session.invalidate();
+			session.removeAttribute("orderList");
 		}
 		//직전 주분내용 꺼내온다
 		
