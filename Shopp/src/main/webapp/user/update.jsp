@@ -263,7 +263,7 @@
 			let check = confirm('정말 탈퇴하시겠습니까?')
 
 			if( check ) {
-				form.action = 'delete_pro.jsp'
+				form.action = 'delete.jsp'
 				form.submit()
 			}
 

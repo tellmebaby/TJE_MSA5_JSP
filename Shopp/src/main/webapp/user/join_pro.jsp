@@ -37,7 +37,7 @@
 	if ( result == 1){
 		// 성공시 로그인 후 상품목록
 		session.setAttribute("loginId", id );		
-		response.sendRedirect("complete.jsp?msg=2");
+		response.sendRedirect("complete.jsp?msg=1");
 	}else{
 		// 실패시 다시
 		response.sendRedirect(root + "/user/join.jsp?id=0");

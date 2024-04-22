@@ -196,12 +196,12 @@ public class UserRepository extends JDBConnection {
 	public int delete(String id) {
 		int result = 0;
 		
-		String sql = " DELETE FROM user "
+		String sql = " DELETE FROM joeun.user "
 				   + " WHERE id = ? ";
 		
 		try {
 			psmt = con.prepareStatement(sql);	// 쿼리 실행 객체 생성
-			psmt.setString( 1, id );				// 1번 ? 에 게시글 번호를 매핑
+			psmt.setString( 1, id );				
 			
 			result = psmt.executeUpdate();		// SQL 실행 요청, 적용된 데이터 개수를 받아온다.
 												// 성공 시, result : 1
@@ -209,7 +209,7 @@ public class UserRepository extends JDBConnection {
 			// executeUpdate()
 			// : SQL (INSERT, UPDATE, DELETE)을 실행하고 적용된 데이터 개수를 int 타입으로 반환
 		} catch (SQLException e) {
-			System.err.println("게시글 삭제 시, 예외 발생");
+			System.err.println("회원 삭제 시, 예외 발생");
 			e.printStackTrace();
 		}
 		return result;
@@ -253,7 +253,7 @@ public class UserRepository extends JDBConnection {
 	        	persistentLogin.setpNo( rs.getInt("p_no")); 
 	        	persistentLogin.setUserId( rs.getString("user_id") ); 
 	        	persistentLogin.setToken( rs.getString("token") ); 
-	        	persistentLogin.setDate( rs.getTimestamp("token") ); 
+	        	persistentLogin.setDate( rs.getTimestamp("date") ); 
 	        }
 	        rs.close();
 	    } catch (SQLException e) {

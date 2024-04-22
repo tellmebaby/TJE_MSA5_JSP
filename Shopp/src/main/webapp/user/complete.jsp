@@ -11,7 +11,8 @@
 
 
 	<% 
-	String user_id = (String) session.getAttribute("loginId");
+	String loginId = (String) session.getAttribute("loginId");
+	int msg = Integer.parseInt(request.getParameter("msg"));
 	String root = request.getContextPath();
 	%>
 	
@@ -22,7 +23,20 @@
 	</div>
 	<!-- 회원 가입/수정/탈퇴 완료 -->
 	<div class="container mb-5">
-		<h1 class="text-center"><%=user_id%>님 환영합니다.</h1>
+	<%
+	switch ( msg ) {
+	case 0: 
+		%> <h1 class="text-center"><%=loginId%>님 환영합니다.</h1> <%
+		break;
+	case 1:	
+		%> <h1 class="text-center">회원 가입이 완료되었습니다.</h1> <%
+		break;
+	case 2:	
+		%> <h1 class="text-center">회원 정보가 수정되었습니다.</h1> <%
+		break;
+	case 3:	
+		%> <h1 class="text-center">회원 정보가 삭제되었습니다.</h1>
+	<% } %>
 		<div class="btn-box d-flex justify-content-center p-5">
 			<a href="<%=root %>" class="btn btn-lg btn-primary">메인 화면</a>
 		</div>
