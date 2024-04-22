@@ -15,6 +15,7 @@
 	OrderRepository orderDAO = new OrderRepository();
 	
 	List<Order> orderList = orderDAO.orderSelectNm(phone, orderPw);
+	int listCount = (orderList.size());
 	session.setAttribute("orderList", orderList);
 	response.sendRedirect(root + "/user/order.jsp");
 

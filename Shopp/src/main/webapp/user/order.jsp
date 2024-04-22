@@ -166,8 +166,8 @@
 						<tr>
 							<td><%=order.getOrderNo()%></td>
 							<td><%=order.getShipName()%></td>
-							<td><%=unitPrice%></td>
-							<td><%=quantity%></td>
+							<td><%=productIo.getUnitPrice()%></td>
+							<td><%=productIo.getQuantity()%></td>
 							<td><%=subTotal%></td>
 							<td></td>
 						</tr>
