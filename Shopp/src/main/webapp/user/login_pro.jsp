@@ -9,18 +9,18 @@
 <%
 String id = request.getParameter("id");
 String pw = request.getParameter("pw");
+String rememberId = request.getParameter("rememberId");
 
 UserRepository userDAO = new UserRepository();
 User loginUser = userDAO.login(id, pw);
 
 if (loginUser == null) {
 	// 로그인 실패
-
 	response.sendRedirect("login.jsp?msg=0");
 } else {
 	// 로그인 성공
-
 	session.setAttribute("loginId", loginUser.getId());
+// 	Cookie cokie_test = new Cookie("test", id ); 페이지 가 여기서 옮겨가면서 생성이 취소되는듯 유지하는거 알아보자
 	response.sendRedirect("complete.jsp?msg=0");
 }
 
@@ -28,10 +28,9 @@ if (loginUser == null) {
 
 // 아이디 저장
 // checkbox 체크시, 기본값 on 이 넘어온다
-String rememberId = request.getParameter("rememberId"); //아이디 저장여부
-	
-	if (rememberId != null) {
-		out.println("rememberMe : " + rememberId);
+
+	if ( rememberId != null && !rememberId.isEmpty() ) {
+		out.println("rememberId : " + rememberId);
 		// ✅ 아이디 저장 체크 시, 쿠키 생성
 		if (rememberId.equals("on")) {
 			// 아이디 저장 체크됨
