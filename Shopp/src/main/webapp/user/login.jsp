@@ -13,10 +13,11 @@
 	<% 
 		String root = request.getContextPath();
 		String error = request.getParameter("error");
+		
+		Cookie[] cookies = request.getCookies();
+		
 		String rememberId = "";
-		String user_id = (String) session.getAttribute("id");
-	    String user_pw = (String) session.getAttribute("pw");
-	    
+		String userId = "";
 		
 		// 이미 로그인한 경우
 		String loginId = (String) session.getAttribute("loginId");
@@ -27,15 +28,15 @@
 		}
 		
 		// 아이디 저장 쿠키 가져오기
-		Cookie[] cookies = request.getCookies();
+		
 		if( cookies != null ){
 			for(int i = 0 ; i < cookies.length ; i++ ) {
 				// userID 라는 이름의 쿠키 가져오기
-				if( cookies[i].getName().equals("loginId") ) {
-					loginId = cookies[i].getValue();
+				if( cookies[i].getName().equals("userID") ) {
+					userId = cookies[i].getValue();
 				}
 				// rememberID 라는 이름의 쿠키 가져오기
-				if( cookies[i].getName().equals("rememberId") ) {
+				if( cookies[i].getName().equals("rememberID") ) {
 					rememberId = cookies[i].getValue();
 				}
 			}
@@ -53,7 +54,7 @@
 	  <form action="login_pro.jsp" method="post">
 	    <div class="form-floating">
 	      <input type="text" class="form-control" id="floatingInput" name="id" 
-	      		 value="<%= loginId %>" placeholder="아이디" autofocus>
+	      		 value="<%= userId %>" placeholder="아이디" autofocus>
 	      <label for="floatingInput">아이디</label>
 	    </div>
 	    <div class="form-floating">

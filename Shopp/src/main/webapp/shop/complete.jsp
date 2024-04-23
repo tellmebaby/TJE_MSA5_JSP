@@ -26,6 +26,7 @@
 	<%
 		String root = request.getContextPath();
 		String loginId = (String) session.getAttribute("loginId");
+	
 		OrderRepository orderDAO = new OrderRepository();
 		String orderPw = request.getParameter("orderPw");
 		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
